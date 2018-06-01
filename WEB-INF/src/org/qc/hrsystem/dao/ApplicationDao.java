@@ -3,7 +3,7 @@ import java.util.*;
 import org.qc.common.Dao.BaseDao;
 import org.qc.hrsystem.domain.*;
 
-public interface ApplicationDao extends BaseDao<ApplicationDao>
+public interface ApplicationDao extends BaseDao<Application>
 {
 	/**
 	*根据员工查询未处理的异动申请

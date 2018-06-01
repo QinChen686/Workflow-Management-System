@@ -90,12 +90,23 @@ public class MgrManagerImpl implements MgrManager
 
     public void addEmp(Employee emp, String Mgr) throws HrException
     {
-
+        Manager mgr=mgrDao.findByName(Mgr);
+        if(mgr==null)
+        {
+           throw new HrException("您是经理吗，或你还未登陆？");
+        }
+        emp.setManager(mgr);
+        empDao.save(emp);
     }
 
     public void check(int appId, String Mgr, boolean result) throws HrException
     {
-
+        Manager mgr=mgrDao.findByName(Mgr);
+        if(mgr==null)
+        {
+            throw new HrException("你是经理吗，或你还未登录？");
+        }
+        Application app=appDao.get(Application.class, appId);
     }
 
     public List<AppBean> getAppByMgr(String mgr) throws HrException
