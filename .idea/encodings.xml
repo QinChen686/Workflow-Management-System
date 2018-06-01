@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/WEB-INF/src/org/qc/hrsystem/vo/AppBean.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/WEB-INF/src/org/qc/hrsystem/vo/AttendBean.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/WEB-INF/src/org/qc/hrsystem/vo/EmpBean.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/WEB-INF/src/org/qc/hrsystem/vo/PaymentBean.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/WEB-INF/src/org/qc/hrsystem/vo/SalaryBean.java" charset="GBK" />
+  </component>
+</project>

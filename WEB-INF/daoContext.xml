@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="GBK"?>
+<!-- 指定Spring配置文件的Schema信息 -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+
+
+	<!-- 定义数据源Bean，使用C3P0数据源实现-->
+	<!-- 设置连接数据库的驱动、URL、用户名、密码、连接池的最大连接数、最小连接数、初始连接数等参数-->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.CombopooledDataSource"
+		destroy-method="close"
+		p:driverClass="com.mysql.jdbc.Driver"
+		p:jdbcUrl="jdbc:mysql://localhost:3306/hrsystem"
+		p:user="root"
+		p:password="shuxuejingsai1"
+		p:maxPoolSize="200"
+		p:minPoolSize="2"
+		p:initialPoolSize="2"
+		p:maxIdleTime="20"/>
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean"
+		p:dataSource-ref="dataSource">
+		<!-- annotatedClasses用于列出全部的持久化类 -->
+		<property name="annotatedClasses">
+			<list>
+				<!-- 以下用于列出Hibernate的持久化类 -->
+				<value>org.qc.hrsystem.domain.Application</value>
+				<value>org.qc.hrsystem.domain.Attend</value>
+				<value>org.qc.hrsystem.domain.AttendType</value>
+				<value>org.qc.hrsystem.domain.CheckBack</value>
+				<value>org.qc.hrsystem.domain.Employee</value>
+				<value>org.qc.hrsystem.domain.Manager</value>	
+				<value>org.qc.hrsystem.domain.Payment</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<!-- 指定数据库方言、是否自动连接表、是否生成SQL语句等 -->
+			<value>
+				hibernate.dialect=org.hibernate.dialect.MySQL5InnoDBDialect
+				hibernate.hbm2ddl.auto=update;
+				hibernate.show_sql=true;
+				hibernate.format_sql=true;
+				#开启二级缓存
+				hibernate.cache.use_second_level_cache=true;
+				#设置二级缓存的提供者
+				hibernate。cache.region.factory_class=org.hibernate.cache.encache.EncacheRegionFactory;
+			</value>
+		</property>
+	</bean>
+	
+	<!--配置Dao模板-->
+	<bean id="daoTemplate" abstract=:true" lazy-init="true"
+		p:sessionFactory-ref="sessionFactory"/>
+	
+	<bean id="employeeDao" class="org.qc.hrsystem.dao.impl.EmployeeDaoHibernate4" parent="daoTemplate"/>
+	<bean id="managerDao" class="org.qc.hrsystem.dao.impl.ManagerDaoHibernate4" parent="daoTemplate"/>
+	<bean id="attendDao" class="org.qc.hrsystem.dao.impl.AttendDaoHibernate4" parent="daoTemplate"/>
+	<bean id="attendTypeDao" class="org.qc.hrsystem.dao.impl.AttendTypeDaoHibernate4" parent="daoTemplate"/>
+	<bean id="appDao" class="org.qc.hrsystem.dao.impl.ApplicationDaoHibernate4" parent="daoTemplate"/>
+	<bean id="checkDao" class="org.qc.hrsystem.dao.impl.CheckBackDaoHibernate4" parent="daoTemplate"/>
+	<bean id="payDao" class="org.qc.hrsystem.dao.impl.ApplicationDaoHibernate4" parent="daoTemplate"/>
+</beans>
