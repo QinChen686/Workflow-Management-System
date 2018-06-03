@@ -26,7 +26,7 @@ public interface EmpManager
     public static final int LEAVE_LIMIT=18;
     public static final int EARLY_LIMIT=16;
 
-    public void autoPunch();
+    public void autoPunch();reset
 
     public int validLogin(Employee emp);
 
