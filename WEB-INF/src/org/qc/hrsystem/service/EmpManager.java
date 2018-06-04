@@ -36,7 +36,7 @@ public interface EmpManager
 
     public List<AttendBean> unAttend(String emp);
 
-    public void addApplication(int attId, int typeId, String reason);
+    public boolean addApplication(int attId, int typeId, String reason);
 
     public List<AttendType> getAllType();
 

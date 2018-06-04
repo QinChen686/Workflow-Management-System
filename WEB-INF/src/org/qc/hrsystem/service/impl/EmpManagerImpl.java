@@ -124,11 +124,30 @@ public class EmpManagerImpl implements EmpManager
         return NO_PUNCH;
     }
 
-    public List<PaymentBean> empSalary(String emp){}
+    public List<PaymentBean> empSalary(String emp)
+    {
+        List<PaymentBean> paymentBeanList = new ArrayList<>();
+        Employee employee = empDao.findByName(emp);
+        Set<Payment> paymentSet = employee.getPayments();
+        for(Payment pay:paymentSet)
+        {
+            paymentBeanList.add(new PaymentBean(pay.getMonth(),pay.getAmount()));
+        }
+        return paymentBeanList;
+    }
 
     public List<AttendBean> unAttend(String emp){}
 
-    public void addApplication(int attId, int typeId, String reason){}
+    public boolean addApplication(int attId, int typeId, String reason)
+    {
+        Application app = new Application();
+        Attend attend = attendDao.get(Attend.class,attId);
+        app.setAttend(attend);
+        AttendType type=typeDao.get(AttendType.class,typeId);
+        app.setType(type);
+        app.setReason(reason);
+        appDao.save(app);
+    }
 
     public List<AttendType> getAllType(){}
 
