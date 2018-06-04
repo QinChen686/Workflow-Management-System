@@ -28,7 +28,7 @@ public interface EmpManager
 
     public void autoPunch();
 
-    public int validLogin(Employee emp);
+    public int validLogin(Manager mgr);
 
     public int validPunch(Employee emp, String dutyDay);
 
