@@ -9,14 +9,15 @@
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/beans/spring-tx-4.0.xsd"
         >
 
-        <bean id="managerTemple" abstract="true" lazy-init="true"
-        p:appDao-ref="appDao"
-        p:attendDao-ref="attendDao"
-        p:typeDao-ref="attendTypeDao"
-        p:checkDao-ref="checkDao"
-        p:empDao-ref="employeeDao"
-        p:mgrDao-ref="managerDao"
-        p:payDao-ref="payDao"/>
+        <bean id="managerTemple" abstract="true" lazy-init="true">
+            <property name="appDao" ref="appDao" />
+            <property name="attendDao" ref="attendDao" />
+            <property name="typeDao" ref="attendTypeDao" />
+            <property name="checkDao" ref="checkDao" />
+            <property name="empDao" ref="employeeDao" />
+            <property name="mgrDao" ref="managerDao" />
+            <property name="payDao" ref="payDao" />
+        </bean>
         <bean id="empManager" class="org.qc.hrsystem.service.impl.EmpManagerImpl" parent="managerTemple"/>
         <bean id="mgrManager" class="org.qc.hrsystem.service.impl.MgrManagerImpl" parent="managerTemple"/>
 

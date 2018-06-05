@@ -52,7 +52,9 @@
 	</bean>
 	
 	<!--ÅäÖÃDaoÄ£°å-->
-	<bean id="daoTemplate" abstract="true" lazy-init="true" p:sessionFactory-ref="sessionFactory" />
+	<bean id="daoTemplate" abstract="true" lazy-init="true">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
 	<bean id="employeeDao" class="org.qc.hrsystem.dao.impl.EmployeeDaoHibernate4" parent="daoTemplate" />
 	<bean id="managerDao" class="org.qc.hrsystem.dao.impl.ManagerDaoHibernate4" parent="daoTemplate"/>
 	<bean id="attendDao" class="org.qc.hrsystem.dao.impl.AttendDaoHibernate4" parent="daoTemplate"/>
