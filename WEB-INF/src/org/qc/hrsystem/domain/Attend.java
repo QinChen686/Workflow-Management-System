@@ -56,11 +56,11 @@ public class Attend implements Serializable
 	{
 		return this.id;
 	}
-	public void setDutyday(String dutyDay)
+	public void setDutyDay(String dutyDay)
 	{
 		this.dutyDay=dutyDay;
 	}
-	public String getDutyday()
+	public String getDutyDay()
 	{
 		return this.dutyDay;
 	}

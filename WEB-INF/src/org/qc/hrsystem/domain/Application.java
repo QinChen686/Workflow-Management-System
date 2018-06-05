@@ -76,7 +76,7 @@ public class Application implements Serializable
 	{
 		this.type=type;
 	}
-	public AttendType getAttendType()
+	public AttendType getType()
 	{
 		return this.type;
 	}

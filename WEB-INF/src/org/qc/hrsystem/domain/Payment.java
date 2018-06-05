@@ -26,11 +26,11 @@ public class Payment implements Serializable
 	@JoinColumn(name="emp_id",nullable=false)
 	private Employee employee;
 	//无参构造器
-	Payment()
+	public Payment()
 	{
 		
 	}
-	Payment(Integer id, String month, Employee employee, double amount)
+	public Payment(Integer id, String month, Employee employee, double amount)
 	{
 		this.id=id;
 		this.month=month;
