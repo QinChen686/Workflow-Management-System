@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="GBK"?>
-<!-- æŒ‡å®šSpringé…ç½®æ–‡ä»¶çš„Schemaä¿¡æ¯ -->
+<!-- Ö¸¶¨SpringÅäÖÃÎÄ¼şµÄSchemaĞÅÏ¢ -->
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:p="http://www.springframework.org/schema/p"
@@ -7,9 +7,9 @@
 	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
 
 
-	<!-- å®šä¹‰æ•°æ®æºBeanï¼Œä½¿ç”¨C3P0æ•°æ®æºå®ç°-->
-	<!-- è®¾ç½®è¿æ¥æ•°æ®åº“çš„é©±åŠ¨ã€URLã€ç”¨æˆ·åã€å¯†ç ã€è¿æ¥æ± çš„æœ€å¤§è¿æ¥æ•°ã€æœ€å°è¿æ¥æ•°ã€åˆå§‹è¿æ¥æ•°ç­‰å‚æ•°-->
-	<bean id="dataSource" class="com.mchange.v2.c3p0.CombopooledDataSource"
+	<!-- ¶¨ÒåÊı¾İÔ´Bean£¬Ê¹ÓÃC3P0Êı¾İÔ´ÊµÏÖ-->
+	<!-- ÉèÖÃÁ¬½ÓÊı¾İ¿âµÄÇı¶¯¡¢URL¡¢ÓÃ»§Ãû¡¢ÃÜÂë¡¢Á¬½Ó³ØµÄ×î´óÁ¬½ÓÊı¡¢×îĞ¡Á¬½ÓÊı¡¢³õÊ¼Á¬½ÓÊıµÈ²ÎÊı-->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
 		destroy-method="close"
 		p:driverClass="com.mysql.jdbc.Driver"
 		p:jdbcUrl="jdbc:mysql://localhost:3306/hrsystem"
@@ -23,10 +23,10 @@
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean"
 		p:dataSource-ref="dataSource">
-		<!-- annotatedClassesç”¨äºåˆ—å‡ºå…¨éƒ¨çš„æŒä¹…åŒ–ç±» -->
+		<!-- annotatedClassesÓÃÓÚÁĞ³öÈ«²¿µÄ³Ö¾Ã»¯Àà -->
 		<property name="annotatedClasses">
 			<list>
-				<!-- ä»¥ä¸‹ç”¨äºåˆ—å‡ºHibernateçš„æŒä¹…åŒ–ç±» -->
+				<!-- ÒÔÏÂÓÃÓÚÁĞ³öHibernateµÄ³Ö¾Ã»¯Àà -->
 				<value>org.qc.hrsystem.domain.Application</value>
 				<value>org.qc.hrsystem.domain.Attend</value>
 				<value>org.qc.hrsystem.domain.AttendType</value>
@@ -37,25 +37,23 @@
 			</list>
 		</property>
 		<property name="hibernateProperties">
-			<!-- æŒ‡å®šæ•°æ®åº“æ–¹è¨€ã€æ˜¯å¦è‡ªåŠ¨è¿æ¥è¡¨ã€æ˜¯å¦ç”ŸæˆSQLè¯­å¥ç­‰ -->
+			<!-- Ö¸¶¨Êı¾İ¿â·½ÑÔ¡¢ÊÇ·ñ×Ô¶¯Á¬½Ó±í¡¢ÊÇ·ñÉú³ÉSQLÓï¾äµÈ -->
 			<value>
 				hibernate.dialect=org.hibernate.dialect.MySQL5InnoDBDialect
-				hibernate.hbm2ddl.auto=update;
-				hibernate.show_sql=true;
-				hibernate.format_sql=true;
-				#å¼€å¯äºŒçº§ç¼“å­˜
-				hibernate.cache.use_second_level_cache=true;
-				#è®¾ç½®äºŒçº§ç¼“å­˜çš„æä¾›è€…
-				hibernateã€‚cache.region.factory_class=org.hibernate.cache.encache.EncacheRegionFactory;
+				hibernate.hbm2ddl.auto=update
+				hibernate.show_sql=true
+				hibernate.format_sql=true
+				#¿ªÆô¶ş¼¶»º´æ
+				hibernate.cache.use_second_level_cache=true
+				#ÉèÖÃ¶ş¼¶»º´æµÄÌá¹©Õß
+				hibernate.cache.region.factory_class=org.hibernate.cache.ehcache.EhCacheRegionFactory
 			</value>
 		</property>
 	</bean>
 	
-	<!--é…ç½®Daoæ¨¡æ¿-->
-	<bean id="daoTemplate" abstract=:true" lazy-init="true"
-		p:sessionFactory-ref="sessionFactory"/>
-	
-	<bean id="employeeDao" class="org.qc.hrsystem.dao.impl.EmployeeDaoHibernate4" parent="daoTemplate"/>
+	<!--ÅäÖÃDaoÄ£°å-->
+	<bean id="daoTemplate" abstract="true" lazy-init="true" p:sessionFactory-ref="sessionFactory" />
+	<bean id="employeeDao" class="org.qc.hrsystem.dao.impl.EmployeeDaoHibernate4" parent="daoTemplate" />
 	<bean id="managerDao" class="org.qc.hrsystem.dao.impl.ManagerDaoHibernate4" parent="daoTemplate"/>
 	<bean id="attendDao" class="org.qc.hrsystem.dao.impl.AttendDaoHibernate4" parent="daoTemplate"/>
 	<bean id="attendTypeDao" class="org.qc.hrsystem.dao.impl.AttendTypeDaoHibernate4" parent="daoTemplate"/>

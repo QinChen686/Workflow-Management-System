@@ -141,15 +141,15 @@ public class MgrManagerImpl implements MgrManager
         {
             throw new HrException("你还没有员工！");
         }
-        List<AppBean> appBeans=new ArrayList<AppBean>();
+        List<AppBean> appBeans=new ArrayList<>();
         for(Employee emp:emps)
         {
             List<Application> apps=appDao.findByEmp(emp);
-            if(apps!=null || apps.size()>=1)
+            if(apps!=null && apps.size()>=1)
             {
                 for(Application app:apps)
                 {
-                    if(app.getResult()==false)
+                    if(!app.getResult())
                     {
                         appBeans.add(new AppBean(app.getId(),emp.getName(),app.getAttend().getType().getName(),app.getType().getName(),app.getReason()));
                     }
@@ -204,7 +204,8 @@ public class MgrManagerImpl implements MgrManager
         List<SalaryBean> salaryBeans = new ArrayList<> ();
         for(Employee emp:emps)
         {
-            salaryBeans.add(new SalaryBean(emp.getName(),emp.getSalary()));
+            Payment pay = payDao.findByEmpAndMonth(emp,month);
+            salaryBeans.add(new SalaryBean(emp.getName(),pay.getAmount()));
         }
         return salaryBeans;
     }

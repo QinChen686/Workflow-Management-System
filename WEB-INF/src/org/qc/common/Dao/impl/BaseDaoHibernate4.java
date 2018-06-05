@@ -8,7 +8,7 @@ public class BaseDaoHibernate4<T> implements BaseDao<T>
 {
 	private SessionFactory sessionFactory;
 	
-	public void setSessionFactory(SessionFactory seesion)
+	public void setSessionFactory(SessionFactory sessionFactory)
 	{
 		this.sessionFactory=sessionFactory;
 	}

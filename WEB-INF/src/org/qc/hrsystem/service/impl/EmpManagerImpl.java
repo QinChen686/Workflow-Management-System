@@ -1,6 +1,5 @@
 package org.qc.hrsystem.service.impl;
 import java.util.*;
-//import java.sql.Date;
 import java.text.*;
 import org.qc.hrsystem.dao.*;
 import org.qc.hrsystem.domain.*;
@@ -106,7 +105,7 @@ public class EmpManagerImpl implements EmpManager
         {
             return NO_PUNCH;
         }
-        if(attends.size()==1&&attends.get(0).getIsCome()==true&&attends.get(0).getPunchTime()==null)
+        if(attends.size()==1&&attends.get(0).getIsCome()&&attends.get(0).getPunchTime()==null)
         {
             return COME_PUNCH;
         }
@@ -178,7 +177,7 @@ public class EmpManagerImpl implements EmpManager
 
         int punchValidRes = validPunch(emp,dutyDay);
         int punchHour=Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
-        if((punchValidRes==COME_PUNCH||punchValidRes==BOTH_PUNCH)&&isCome==true)
+        if((punchValidRes==COME_PUNCH||punchValidRes==BOTH_PUNCH)&&isCome)
         {
             if(punchHour<COME_LIMIT)
             {
@@ -189,7 +188,7 @@ public class EmpManagerImpl implements EmpManager
                 attend.setType(typeDao.get(AttendType.class,4));
             }
         }
-        if((punchValidRes==LEAVE_PUNCH||punchValidRes==BOTH_PUNCH)&&isCome==false)
+        if((punchValidRes==LEAVE_PUNCH||punchValidRes==BOTH_PUNCH)&&!isCome)
         {
             attend.setPunchTime(new Date());
             if(punchHour>=LEAVE_LIMIT)

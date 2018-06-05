@@ -19,7 +19,7 @@ import javax.imageio.*;
  * @author  Yeeku.H.Lee kongyeeku@163.com
  * @version  1.0
  */
-@WebServlet(urlPatterns={"/WEB-INF/content/authImg.jsp"})
+@WebServlet(urlPatterns={"/WEB-INF/content/authImg.jsp"})  
 public class AuthImg extends HttpServlet
 {
 	// 定义图形验证码中绘制字符的字体
