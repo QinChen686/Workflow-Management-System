@@ -15,5 +15,7 @@ public interface MgrManager
     public List<AppBean> getAppByMgr(String mgr);
 
     public List<EmpBean> getEmpByMgr(String mgr);
+
+
 }
 

@@ -33,12 +33,12 @@ public class Attend implements Serializable
 	@JoinColumn(name="emp_id",nullable=false)
 	private Employee employee;
 	//无参构造器
-	Attend()
+	public Attend()
 	{
 		
 	}
 	//初始化全部参数的构造器
-	Attend(Integer id, String dutyDay, Date punchTime, boolean isCome, AttendType type, Employee employee)
+	public Attend(Integer id, String dutyDay, Date punchTime, boolean isCome, AttendType type, Employee employee)
 	{
 		this.id=id;
 		this.dutyDay=dutyDay;
