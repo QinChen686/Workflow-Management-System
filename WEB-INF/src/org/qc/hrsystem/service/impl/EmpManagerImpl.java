@@ -137,7 +137,18 @@ public class EmpManagerImpl implements EmpManager
         return paymentBeanList;
     }
 
-    public List<AttendBean> unAttend(String emp){}
+    public List<AttendBean> unAttend(String emp)
+    {
+        Employee employee = empDao.findByName(emp);
+        AttendType type = typeDao.get(AttendType.class,1);
+        List<Attend> attendList=attendDao.findByEmpUnAttend(employee,type);
+        List<AttendBean> attendBeans=new ArrayList<>();
+        for(Attend attend:attendList)
+        {
+            attendBeans.add(new AttendBean(attend.getId(),attend.getDutyDay(),attend.getType().getName(),attend.getPunchTime()));
+        }
+        return attendBeans;
+    }
 
     public boolean addApplication(int attId, int typeId, String reason)
     {
@@ -148,9 +159,13 @@ public class EmpManagerImpl implements EmpManager
         app.setType(type);
         app.setReason(reason);
         appDao.save(app);
+        return true;
     }
 
-    public List<AttendType> getAllType(){}
+    public List<AttendType> getAllType()
+    {
+        return typeDao.findAll(AttendType.class);
+    }
 
     public int punch(String user, String dutyDay, boolean isCome)
     {
