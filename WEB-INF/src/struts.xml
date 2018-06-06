@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    <constant name="struts.il8n.encoding" value="GBK"/>
+    <constant name="struts.custom.il8n.resource" value="resource"/>
+    <constant name="struts.devMode" value="true"/>
+    <package name="hrSystem" extends="struts-default">
+
+        <interceptors>
+            <interceptor name="empAuth" class="org.qc.hrsystem.action.authority.EmpAuthorityInterceptor"/>
+            <interceptor name="mgrAuth" class="org.qc.hrsystem.action.authority.MgrAuthorityInterceptor"/>
+            <interceptor-stack name="empStack">
+                <interceptor-ref name="defaultStack"/>
+                <interceptor-ref name="empAuth"/>
+            </interceptor-stack>
+            <interceptor-stack name="mgrStack">
+                <interceptor-ref name="defaultStack"/>
+                <interceptor-ref name="mgrAuth"/>
+            </interceptor-stack>
+        </interceptors>
+
+        <global-results>
+            <!-- 定义两个异常对应的result -->
+            <result name="business">/WEB-INF/content/error.jsp</result>
+            <result name="root">/WEB-INF/content/error.jsp</result>
+            <result name="login">/WEB-INF/content/login.jsp</result>
+        </global-results>
+
+        <!-- 定义异常处理mapping -->
+        <global-exception-mappings>
+            <exception-mapping exception="org.qc.hrsystem.exception.HrException" result="business"/>
+            <exception-mapping exception="java.lang.Exception" result="root"/>
+        </global-exception-mappings>
+
+        <!-- 定义employee的action -->
+        <action name="processLogin" class="org.qc.hrsystem.action.LoginAction">
+            <result name="emp">/WEB-INF/content/index.jsp</result>
+            <result name="mgr">/WEB-INF/content/index.jsp</result>
+            <result name="error">/WEB-INF/content/login.jsp</result>
+            <result name="input">/WEB-INF/content/login.jsp</result>
+        </action>
+
+    </package>
+</struts>

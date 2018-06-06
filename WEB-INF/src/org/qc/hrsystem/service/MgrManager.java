@@ -8,7 +8,7 @@ public interface MgrManager
 {
     public void addEmp(Employee emp, String mgr) throws HrException;
 
-    public void check(int appid, String mgrName, boolean result);
+    public void check(int appId, String mgrName, boolean result);
 
     public List<SalaryBean> getSalaryByMgr(String mgr);
 

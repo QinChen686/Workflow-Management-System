@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/WEB-INF/WEB-INF.iml" filepath="$PROJECT_DIR$/WEB-INF/WEB-INF.iml" />
       <module fileurl="file://$PROJECT_DIR$/Workflow-Management-System.iml" filepath="$PROJECT_DIR$/Workflow-Management-System.iml" />
       <module fileurl="file://$PROJECT_DIR$/WEB-INF/src/org/qc/common/common.iml" filepath="$PROJECT_DIR$/WEB-INF/src/org/qc/common/common.iml" />
     </modules>
