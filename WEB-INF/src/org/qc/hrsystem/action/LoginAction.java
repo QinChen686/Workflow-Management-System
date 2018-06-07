@@ -32,7 +32,7 @@ public class LoginAction extends EmpBaseAction {
         return this.verCode;
     }
 
-    public String execute(String verCode) throws Exception
+    public String execute() throws Exception
     {
         ActionContext ctx = ActionContext.getContext();
         String verCode2 = (String) ctx.getSession().get("rand");
