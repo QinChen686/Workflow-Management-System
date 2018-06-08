@@ -30,7 +30,7 @@ public interface EmpManager
 
     public int validLogin(Manager mgr);
 
-    public int validPunch(Employee emp, String dutyDay);
+    public int validPunch(String emp0, String dutyDay);
 
     public List<PaymentBean> empSalary(String emp);
 

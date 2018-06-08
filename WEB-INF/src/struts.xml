@@ -36,12 +36,91 @@
             <exception-mapping exception="java.lang.Exception" result="root"/>
         </global-exception-mappings>
 
-        <!-- 定义employee的action -->
+<!-- =====================================Employee对应的Action=================================== -->
         <action name="processLogin" class="org.qc.hrsystem.action.LoginAction">
             <result name="emp">/WEB-INF/content/index.jsp</result>
             <result name="mgr">/WEB-INF/content/index.jsp</result>
             <result name="error">/WEB-INF/content/login.jsp</result>
             <result name="input">/WEB-INF/content/login.jsp</result>
+        </action>
+
+        <action name="Logout" class="org.qc.hrsystem.action.LogoutAction">
+            <result name="success">/WEB-INF/content/main.jsp</result>
+        </action>
+
+        <action name="appChange" class="org.qc.hrsystem.action.AppChangeAction">
+            <interceptor-ref name="store">
+                <param name="operationMode">RETRIEVE</param>
+            </interceptor-ref>
+            <interceptor-ref name="empStack"/>
+            <result name="success">/WEB-INF/content/employee/appChange.jsp</result>
+        </action>
+
+        <action name="viewUnAttend" class="org.qc.hrsystem.action.ViewUnAttend">
+            <interceptor-ref name="empStack"/>
+            <result name="success">/WEB-INF/content/employee/viewUnAttend.jsp</result>
+        </action>
+
+        <action name="view*Salary" class="ViewSalaryAction">
+            <interceptor-ref name="empStack"/>
+            <result name="success">/WEB-INF/content/{1}/viewSalary.jsp</result>
+        </action>
+
+        <action name="processApp" class="ProcessAppAction">
+            <interceptor-ref name="empStack"/>
+            <result name="success">/WEB-INF/content/employee/index.jsp</result>
+
+            <!-- 请求根命名空间的action ${attId}表示的是当前processApp action中的变量-->
+            <result name="redirect">/appChange.action?attId=${attId}</result>
+        </action>
+
+        <action name="*punch" class="punchAction">
+            <interceptor-ref name="empStack"/>
+            <result name="success">/WEB-INF/content/{1}/punch.jsp</result>
+        </action>
+
+        <action name="*come" method="come" class="org.qc.hrsystem.action.ProcessAppAction">
+            <interceptor-ref name="empStack"/>
+            <result name="success">/WEB-INF/content/{1}/index.jsp</result>
+        </action>
+
+        <action name="*leave" method="leave" class="org.qc.hrsystem.action.ProcessAppAction">
+            <interceptor-ref name="empStack"/>
+            <result name="success">/WEB-INF/content/{1}/index.jsp</result>
+        </action>
+
+<!-- =====================================Manager对应的Action=================================== -->
+        <action name="viewEmp" class="org.qc.hrsystem.action.ViewEmpAction">
+            <interceptor-ref name="mgrStack"/>
+            <result name="success">/WEB-INF/content/manager/viewEmp.jsp</result>
+        </action>
+
+        <action name="viewApp" class="org.qc.hrsystem.action.ViewAppAction">
+            <interceptor-ref name="mgrStack"/>
+            <result name="success" >/WEB-INF/content/manager/viewApp.jsp</result>
+        </action>
+
+        <action name="viewDeptSalary" class="org.qc.hrsystem.action.ViewDeptAction">
+            <interceptor-ref name="mgrStack"/>
+            <result name="success">/WEB-INF/content/manager/viewDeptSalary.jsp</result>
+        </action>
+
+        <action name="addEmp">
+            <interceptor-ref name="mgrStack"/>
+            <result name="success">/WEB-INF/content/manager/addEmp.jsp</result>
+        </action>
+
+        <action name="processAddEmp" class="org.qc.hrsystem.action.AddEmpAction">
+            <interceptor-ref name="mgrStack"/>
+            <interceptor-ref name="token"/>
+            <result name="success">/WEB-INF/content/manager/index.jsp</result>
+            <result name="invalid.token">/WEB-INF/content/manager/addEmp.jsp</result>
+            <result name="input">/WEB-INF/content/manager/addEmp.jsp</result>
+        </action>
+
+        <action name="check" class="org.qc.hrsystem.action.CheckAppAction">
+            <interceptor-ref name="mgrStack"/>
+            <result type="chain">viewApp</result>
         </action>
 
     </package>

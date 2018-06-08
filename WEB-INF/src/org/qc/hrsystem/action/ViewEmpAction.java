@@ -4,8 +4,7 @@ import java.util.List;
 
 import com.opensymphony.xwork2.ActionContext;
 import org.qc.hrsystem.action.base.MgrBaseAction;
-import org.qc.hrsystem.vo.EmpBean;
-import org.qc.hrsystem.domain.Manager;
+
 public class ViewEmpAction extends MgrBaseAction
 {
     private List emps;

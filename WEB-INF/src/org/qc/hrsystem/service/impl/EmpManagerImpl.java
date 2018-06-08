@@ -98,8 +98,13 @@ public class EmpManagerImpl implements EmpManager
        return LOGIN_FAIL;
     }
 
-    public int validPunch(Employee emp, String dutyDay)
+    public int validPunch(String emp0, String dutyDay)
     {
+        Employee emp=empDao.findByName(emp0);
+        if(emp==null)
+        {
+            return NO_PUNCH;
+        }
         List<Attend> attends = attendDao.findByEmpAndDutyDay(emp,dutyDay);
         if(attends==null||attends.size()<1)
         {
@@ -174,10 +179,8 @@ public class EmpManagerImpl implements EmpManager
         return PUNCH_FAIL;
         if(attend.getPunchTime()!=null)
             return PUNCHED;
-
-        int punchValidRes = validPunch(emp,dutyDay);
         int punchHour=Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
-        if((punchValidRes==COME_PUNCH||punchValidRes==BOTH_PUNCH)&&isCome)
+        if(isCome)
         {
             if(punchHour<COME_LIMIT)
             {
@@ -188,7 +191,7 @@ public class EmpManagerImpl implements EmpManager
                 attend.setType(typeDao.get(AttendType.class,4));
             }
         }
-        if((punchValidRes==LEAVE_PUNCH||punchValidRes==BOTH_PUNCH)&&!isCome)
+        if(!isCome)
         {
             attend.setPunchTime(new Date());
             if(punchHour>=LEAVE_LIMIT)
