@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE validators PUBLIC
+        "-//Apache Struts//XWork Validator 1.0.3//EN"
+        "http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+<validators>
+    <field name="attendId">
+        <field-validator type="required">
+            <message>申请id必填</message>
+        </field-validator>
+    </field>
+
+    <field name="typeId">
+        <field-validator type="required">
+            <message>改变到的类型id必填</message>
+        </field-validator>
+    </field>
+
+    <field name="reason">
+        <field-validator type="requiredstring">
+            <message>申请理由必填</message>
+        </field-validator>
+        <field-validator type="regex">
+            <param name="regex"><![CDATA[(/w{6,})]]></param>
+            <message>理由需要超过6个字符</message>
+        </field-validator>
+    </field>
+</validators>
