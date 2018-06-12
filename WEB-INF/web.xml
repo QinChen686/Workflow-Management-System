@@ -16,8 +16,7 @@
     <!-- 在listener中配置spring context-->
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>/WEB-INF/applicationContext.xml,
-            /WEB-INF/daoContext.xml</param-value>
+        <param-value>/WEB-INF/applicationContext.xml,/WEB-INF/daoContext.xml</param-value>
     </context-param>
 
     <listener>
@@ -25,7 +24,7 @@
     </listener>
 
     <welcome-file-list>
-        <welcome-file>index.jsp</welcome-file>
+        <welcome-file>/WEB-INF/content/index.jsp</welcome-file>
     </welcome-file-list>
 
 </web-app>

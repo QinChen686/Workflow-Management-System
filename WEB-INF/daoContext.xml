@@ -12,7 +12,7 @@
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
 		destroy-method="close"
 		p:driverClass="com.mysql.jdbc.Driver"
-		p:jdbcUrl="jdbc:mysql://localhost:3306/hrsystem"
+		p:jdbcUrl="jdbc:mysql://localhost:3306/hrsystem?characterEncoding=utf8&amp;useSSL=true"
 		p:user="root"
 		p:password="shuxuejingsai1"
 		p:maxPoolSize="200"
@@ -61,5 +61,5 @@
 	<bean id="attendTypeDao" class="org.qc.hrsystem.dao.impl.AttendTypeDaoHibernate4" parent="daoTemplate"/>
 	<bean id="appDao" class="org.qc.hrsystem.dao.impl.ApplicationDaoHibernate4" parent="daoTemplate"/>
 	<bean id="checkDao" class="org.qc.hrsystem.dao.impl.CheckBackDaoHibernate4" parent="daoTemplate"/>
-	<bean id="payDao" class="org.qc.hrsystem.dao.impl.ApplicationDaoHibernate4" parent="daoTemplate"/>
+	<bean id="payDao" class="org.qc.hrsystem.dao.impl.PaymentDaoHibernate4" parent="daoTemplate"/>
 </beans>
